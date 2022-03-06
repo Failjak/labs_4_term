@@ -4,7 +4,7 @@ template <class T>
 SmartPointer<T>::SmartPointer(T* ptr)
 {
 	if (!ptr)
-		smartPtr = NULL;
+		smartPtr = NULL; 
 	else {
 		smartPtr = new Status<T>();
 		smartPtr->ptr = ptr;

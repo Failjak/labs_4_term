@@ -20,4 +20,5 @@ public:
 	T* operator->() const;
 
 	int getCounter() { return smartPtr->counter; }
+	T* getPtr() { return smartPtr->ptr; }
 };
