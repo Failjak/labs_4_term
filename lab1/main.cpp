@@ -1,70 +1,25 @@
 #include <iostream>
-#include <vector>
-#include <string>
 
-#include "SmartPointer.cpp"
-#include "Transaction.cpp"
-#include "Library.cpp"
+#include "MobileApp.hpp"
+#include "SmartPointer.hpp"
+#include "Transaction.hpp"
 
-using namespace std;
-
-int menu();
-int confirm();
 
 int main()
 {
-	Transaction<Library> library;
-	library.beginTransactions();
 
-	while(true)
-	{
-		switch (menu())
-		{
-		case 1:
-		{
-			library.beginTransactions();
-			
-			string location;
-			cout << "Enter location to this library: ";
-			cin >> location;
+	Documentation doc1 = Documentation({ "This is app,", "helps people do something!" });
+	Stack stack1 = Stack({ "DRF", "PostgreSQL", "Docker", "Python QIWI", "React", "AWS textract" });
+	Developer dev1 = Developer("Gushtyn");
+	Developer dev2 = Developer("Art");
+	TeamLead lead1 = TeamLead("Evgen", { dev1, dev2 });
+	SmartPointer<Application> greatApp = new Application(doc1, stack1, { dev1, dev2 }, {lead1});
 
-			library->setLocation(location);
-			library.commit();
-			break;
-		}
-		default:
-		cout << "Wrnog choice" << endl;
-			break;
-		}
-	}
+	Transaction<SmartPointer<Application>> greatAppTransact;
+
+	greatAppTransact.beginTransactions();
+	Documentation new_doc = Documentation({ "There's not an app,", "!!!" });
 
 	return 0;
 }
 
-int menu()
-{
-	int choice;
-
-	cout << "1 - Add employee to library." << endl;
-	cout << "2 - Change library location." << endl;
-	cout << "3 - Get list of employees." << endl;
-	cout << "4 - Get library location." << endl;
-	cout << "0 - Exit" << endl;
-	cout << "your choice: ";
-	cin >> choice;
-
-	return choice;
-}
-
-int confirm()
-{
-	int choice;
-
-	cout << "1 - Confirm transaction." << endl;
-	cout << "2 - Cancle transaction." << endl;
-	cout << "your choice: ";
-
-	cin >> choice;
-
-	return choice;
-}

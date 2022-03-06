@@ -1,4 +1,4 @@
-#include "SmartPointer.h"
+#include "SmartPointer.hpp"
 
 template <class T>
 SmartPointer<T>::SmartPointer(T* ptr)
