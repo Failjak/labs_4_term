@@ -45,12 +45,12 @@ Medicament::Medicament(string title, string manual, float price) : title(title),
     }
 }
 
-Medicament::Medicament(const Medicament & obj)
-{
-    title = obj.title;
-    manual = obj.manual;
-    price = obj.price;
-}
+// Medicament::Medicament(const Medicament & obj)
+// {
+//     title = obj.title;
+//     manual = obj.manual;
+//     price = obj.price;
+// }
 
 void Medicament::printInfo()
 {
@@ -75,9 +75,9 @@ void Pharmacy::printInfo()
     }
 }
 
-Order * Pharmacy::createOrder()
+Order * Pharmacy::createOrder(User * user)
 {   
-    Order * order;
+    Order * order = new Order;
 
     cout << "Choice nessesary medicament (0 - exit)" << endl;
     int ind = 0;
@@ -87,19 +87,16 @@ Order * Pharmacy::createOrder()
         cout << "   " << ++ind << "): ", med.printInfo();
     }
 
-    int choice; 
+    int choice;
     cin >> choice;
-    while(choice != 0)
-    {
-        try{
-            order->addMedicament(medicaments.at(choice - 1));
-        } catch(out_of_range) {
-            cout << "!!! EXC !!!\nout_of_range exception, nothing to add" << endl;
-        }
-        choice = 0;
-        cin.clear();
-        cin >> choice;
-    }   
+
+    try{
+        order->addMedicament(&medicaments.at(choice - 1));
+        order->setUser(user);
+    } catch(out_of_range) {
+        cout << "!!! EXC !!!\nout_of_range exception, nothing to add" << endl;
+        return new Order();
+    }
 
     return order;
 }
@@ -142,11 +139,29 @@ Pharmacist::Pharmacist(string surname, string name, float salary) : People(surna
 
 void Order::printInfo()
 {
+    float price = 0;
+    
     cout << "ORDER" << endl;
 
     cout << "Medicaments in order:" << endl;
     for (auto med : medicaments)
     {
-        cout << "   ", med.printInfo();
+        cout << "   ", med->printInfo();
+        price += med->getPrice();
+
+    }
+
+    try {
+        if (user->getBalance() < price) 
+            throw InsufficientFunds();
+        paid();
+    } catch(InsufficientFunds) {
+        cout << user->getFullName() << ", there are not enough funds in your account" << endl;
+    }
+
+    if (status == true)
+        cout << "Product is ordered" << endl;
+    else{
+        cout << "Product not ordered" << endl;
     }
 }

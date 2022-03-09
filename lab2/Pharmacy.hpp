@@ -6,6 +6,7 @@
 using namespace std;
 
 class NegativNum {};
+class InsufficientFunds {};
 class Order;
 
 class Medicament
@@ -18,7 +19,7 @@ private:
 public:
     Medicament() {};
     Medicament(string title, string manual, float price);
-    Medicament(const Medicament &);
+    Medicament(const Medicament & obj) : title(obj.title), manual(obj.manual), price(obj.price) {};
 
     string getTitle() { return title; }
     string getManual() { return manual; }
@@ -67,6 +68,8 @@ private:
 public:
     User(string surname, string name, float balance) : People(surname, name), balance(balance) {};
     User(const User &);
+
+    float getBalance() { return balance; }
  
 };
 
@@ -111,19 +114,23 @@ public:
 
     void printInfo();
     Pharmacist * choicePharm();
-    Order * createOrder();
+    Order * createOrder(User *);
 };
 
 class Order
 {
 private:
-    vector<Medicament> medicaments;
+    vector<Medicament *> medicaments;
+    User * user;
+    bool status = false;
 
 public:
-    Order();
-    Order(vector<Medicament> medicaments) : medicaments(medicaments) {};
+    Order() : medicaments({}) {};
+    Order(vector<Medicament *> medicaments) : medicaments(medicaments) {};
     Order(const Order &);
 
-    void addMedicament(Medicament med) { medicaments.push_back(med); }
+    void addMedicament(Medicament * med) { medicaments.push_back(med); }
     void printInfo();
+    void setUser(User * user) { this->user = user; }
+    void paid() { status = true; }
 };
