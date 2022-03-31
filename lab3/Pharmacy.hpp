@@ -115,6 +115,9 @@ public:
     void printInfo();
     Pharmacist * choicePharm();
     Order * createOrder(User *);
+
+    vector<Medicament> getMedicaments() {return medicaments;}
+    vector<Pharmacist> getPharmacists() {return pharmacists;}
 };
 
 class Order
