@@ -1,8 +1,13 @@
 #include <algorithm>
+#include <vector>
+#include <iostream>
 
 #include "Pharmacy.hpp"
 #include "Pharmacy.cpp"
 #include "menu.cpp"
+#include "file_handler.cpp"
+
+using namespace std;
 
 
 void edit_pharmacy(Pharmacy * pharmacy)
@@ -194,9 +199,9 @@ void get_pharmacy_list(Pharmacy * pharmacy)
 }
 
 
-void file_handler(Pharmacy * pharmacy)
+void file_handler(Pharmacy * pharmacy, string file_name)
 {
-    bool flag = false;
+    bool flag = true;
     while(flag)
     {
         switch (file_menu())
@@ -204,6 +209,13 @@ void file_handler(Pharmacy * pharmacy)
 
         case 1: // append data to file
         {
+            vector<string> a;
+            a.push_back("hello world");
+            a.push_back("hello Nikita");
+
+            
+            put_to_file(file_name, a);
+
             break;
         }
 
@@ -235,4 +247,4 @@ void file_handler(Pharmacy * pharmacy)
             break;
         }
     }
-    }
+}

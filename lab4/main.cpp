@@ -2,12 +2,18 @@
 #include <vector>
 #include <memory>
 
-#include "Pharmacy.hpp"
-#include "Pharmacy.cpp"
-#include "menu.cpp"
 #include "common.cpp"
 
 using namespace std;
+
+
+
+// TODO 
+// 1) open(), is_open(), close()
+// 2) eof(), fail(), 
+// 3) overload << and >> 
+// 4) seekg(), seekp(), tellg()
+
 
 
 void exitFunc();
@@ -52,7 +58,8 @@ int main()
 
         case 5:
         {
-            
+            file_handler(pharmacy, "text.txt");
+            break;
         }
 
         case 0:
