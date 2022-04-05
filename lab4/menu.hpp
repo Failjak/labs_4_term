@@ -1,3 +1,5 @@
+#pragma once
+
 #include <iostream>
 
 using namespace std;
@@ -98,7 +100,8 @@ int file_menu()
         << "2 - Delete from file\n"
         << "3 - Edit info in a file\n"
         << "4 - Look at the data\n"
-        << "5 - Data search"
+        << "5 - Data search\n"
+        << "6 - Clear the file"
         << endl;
 
     int choice;

@@ -2,6 +2,7 @@
 
 #include <string>
 #include <vector>
+#include <iostream>
 
 using namespace std;
 
@@ -19,6 +20,7 @@ private:
 public:
     Medicament() {};
     Medicament(string title, string manual, float price);
+    Medicament(vector<string>);
     Medicament(const Medicament & obj) : title(obj.title), manual(obj.manual), price(obj.price) {};
 
     string getTitle() { return title; }
@@ -26,6 +28,10 @@ public:
     float getPrice() { return price; }
 
     void printInfo();
+    string getInfo();
+
+    friend istream& operator >>(istream& s, Medicament& d);
+    friend ostream& operator <<(ostream& s, Medicament& d);
 };
 
 class People
@@ -54,9 +60,11 @@ private:
 
 public:
     Pharmacist(string surname, string name, float salary);
+    Pharmacist(vector<string>);
     Pharmacist(const Pharmacist & obj) : People(obj.surname, obj.name), salary(obj.salary) {};
 
     void printInfo();
+    string getInfo();
 };
 
 
@@ -113,11 +121,14 @@ public:
     // Pharmacy(const Pharmacy &);
 
     void printInfo();
+    string getInfo();
     Pharmacist * choicePharm();
     Order * createOrder(User *);
 
     vector<Medicament> getMedicaments() {return medicaments;}
     vector<Pharmacist> getPharmacists() {return pharmacists;}
+
+    void setMedicaments(vector<Medicament> new_meds) {medicaments = new_meds;}
 };
 
 class Order

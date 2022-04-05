@@ -1,17 +1,19 @@
 #include <iostream>
 #include <vector>
 #include <memory>
+#include <string>
 
-#include "common.cpp"
+#include "common.hpp"
+#include "file_handler.hpp"
+// #include "Pharmacy.hpp"
+// #include "Pharmacy.cpp"
+#include "menu.hpp"
 
 using namespace std;
 
 
 
 // TODO 
-// 1) open(), is_open(), close()
-// 2) eof(), fail(), 
-// 3) overload << and >> 
 // 4) seekg(), seekp(), tellg()
 
 
@@ -21,7 +23,9 @@ Pharmacy * createPharmacy();
 
 
 int main()
-{
+{   
+    string file_name = "text.txt";
+
     Pharmacy * pharmacy = createPharmacy();
     User user("Batk", "Semen", 12);
 
@@ -58,7 +62,7 @@ int main()
 
         case 5:
         {
-            file_handler(pharmacy, "text.txt");
+            file_handler(pharmacy, file_name);
             break;
         }
 
@@ -73,6 +77,7 @@ int main()
         }
     }
 
+    clear_file(file_name);
     return 0;
 }
 

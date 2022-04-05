@@ -1,4 +1,5 @@
 #include <iostream>
+#include <string>
 
 #include "Pharmacy.hpp"
 
@@ -58,6 +59,41 @@ void Medicament::printInfo()
 }
 
 
+istream& operator >>(istream& s, Medicament& med) 
+{
+    cout << "\nEnter medicament title: ";
+    s >> med.title;
+    cout << "Enter manual to medicament: ";
+    s >> med.manual;
+    cout << "Enter the price for this medicament: ";
+    s >> med.price;
+
+    return s;
+}
+
+ostream& operator <<(ostream& s, Medicament& med) 
+{
+    s << med.title << ", " << med.price << "$" << endl;
+    s << "\tManual: " << med.manual << endl;
+    return s;
+}
+
+string Medicament::getInfo()
+{
+    return title + ";" + manual + ";" + to_string(price);
+}
+
+Medicament::Medicament(vector<string> data)
+{
+    if (data.size() != 3)
+        throw "Wrond vecotr format (needed 3 values)";
+
+    title = data[0];
+    manual = data[1];
+    price = stoi(data[2]);
+}
+
+
 void Pharmacy::printInfo()
 {
     cout << "Pharmace address: " << getAddress() << "\n";
@@ -73,6 +109,11 @@ void Pharmacy::printInfo()
     {
         cout << "   Medicament: ", med.printInfo();
     }
+}
+
+string Pharmacy::getInfo()
+{
+    return getCity() + ";" + getStreet() + ";" + getBuild();
 }
 
 Order * Pharmacy::createOrder(User * user)
@@ -134,7 +175,20 @@ Pharmacist::Pharmacist(string surname, string name, float salary) : People(surna
         cout << "Salary denied - salary must be greater than 0" << endl;
         cout << surname <<", salary set to NULL" << endl;
     }
-    salary = 0;
+    this->salary = salary;
+}
+
+Pharmacist::Pharmacist(vector<string> data): People(data[0], data[1])
+{   
+    if (data.size() != 3)
+        throw "Wrond vecotr format (needed 3 values)";
+
+    salary = stoi(data[2]);
+}
+
+string Pharmacist::getInfo()
+{
+    return surname + ";" + name + ";" + to_string(salary);
 }
 
 void Order::printInfo()
