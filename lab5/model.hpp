@@ -30,8 +30,8 @@ public:
     vector<string> findTopic(string); // return all titles from the topic
     string findTitle(string); //return topic
 
-    void sort(); // sort by topics
-    void sort(string); // sort in this topic
+    void sortTopic(); // sort by topics
+    void sortTitle(string); // sort in this topic
 
     void put_to_file(std::string file_name);
 };

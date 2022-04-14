@@ -82,16 +82,68 @@ int main()
 
         case 5:
         {
+            books->put_to_file("text.txt");
             break;
         }
 
         case 6:
         {
+            switch (find_menu())
+            {
+            case 1:
+            {
+                string topic;
+                cout << "Enter topice: ";
+                getline(cin, topic);
+
+                books->findTopic(topic);
+
+                break;
+            }
+
+            case 2:
+            {
+                string title;
+                cout << "Enter title: ";
+                getline(cin, title);
+
+                books->findTitle(title);
+                break;
+            }      
+
+            default:
+                cout << "Wrond choice" << endl;
+                break;
+            }
             break;
         }
 
         case 7:
-        {
+        {   
+            switch (sort_menu())
+            {
+            case 1:
+            {
+                books->sortTopic();
+
+                break;
+            }
+
+            case 2:
+            {
+                string topic;
+                cout << "Enter the topic in which you will be sorting: ";
+                getline(cin, topic);
+
+                books->sortTitle(topic);
+                break;
+            }      
+
+            default:
+                cout << "Wrond choice" << endl;
+                break;
+            }
+            break;
             break;
         }
 
@@ -118,6 +170,30 @@ int menu()
         << "0 - Exit" 
         << endl;
 
+    int choice;
+    cin >> choice;
+    return choice;
+}
+
+int find_menu()
+{
+    cout 
+        << "1 - Search by topic\n"
+        << "2 - Search by title\n"
+        << endl;
+    
+    int choice;
+    cin >> choice;
+    return choice;
+}
+
+int sort_menu()
+{
+    cout 
+        << "1 - Sort by topic\n"
+        << "2 - Sort by title\n"
+        << endl;
+    
     int choice;
     cin >> choice;
     return choice;
