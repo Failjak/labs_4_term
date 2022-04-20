@@ -8,6 +8,8 @@
 using namespace std;
 
 int menu();
+int find_menu();
+int sort_menu();
 
 int main()
 {   
@@ -94,20 +96,21 @@ int main()
             {
                 string topic;
                 cout << "Enter topice: ";
-                getline(cin, topic);
+                cin >> topic;
 
-                books->findTopic(topic);
-
+                auto list = books->findTopic(topic);
+                for (auto l : list )
+                    cout << l << endl;
                 break;
             }
 
             case 2:
             {
-                string title;
-                cout << "Enter title: ";
-                getline(cin, title);
+                // string title;
+                // cout << "Enter title: ";
+                // getline(cin, title);
 
-                books->findTitle(title);
+                // books->findTitle(title);
                 break;
             }      
 
@@ -133,8 +136,7 @@ int main()
             {
                 string topic;
                 cout << "Enter the topic in which you will be sorting: ";
-                getline(cin, topic);
-
+                cin >> topic;
                 books->sortTitle(topic);
                 break;
             }      

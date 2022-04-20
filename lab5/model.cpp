@@ -72,10 +72,10 @@ vector<string> BookList::findTopic(string topic)
     return {};
 }
 
-string BookList::findTitle(string title)
-{
+// string BookList::/findTitle(string title)
+// {
     // # TODO need to iterate by map and find this title
-}
+// }
 
 // comparators
 bool topicCmp(pair<string, vector<string>>& a, pair<string, vector<string>>& b)
@@ -124,6 +124,19 @@ void BookList::put_to_file(string file_name)
         for (auto title: topic.second)
             data_to_file.push_back(title);
 
-        FileManagment::put_to_file(file_name, data_to_file);       
-    }
+        ofstream file;
+        file.open(file_name, ios::app);
+
+        if (file.is_open())
+        {
+            for(string d : data_to_file)
+            {
+                file << d << endl;
+            }
+
+        }
+        file.close();
+
+        return;      
+        }
 }
